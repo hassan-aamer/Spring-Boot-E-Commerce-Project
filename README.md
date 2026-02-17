@@ -26,7 +26,7 @@ This project aims to create a basic e-commerce platform. Users can view products
 | ----------- | -------------------------------------------- |
 | Spring Boot | Java-based web application framework         |
 | JPA         | Database operations and entity relationships |
-| PostgreSQL  | Database                                     |
+| MySQL       | Database                                     |
 | Postman     | API testing                                  |
 | Maven       | Project and dependency management            |
 
@@ -65,24 +65,12 @@ This project aims to create a basic e-commerce platform. Users can view products
 - `GET /orders/{id}` - View order details
 - `PATCH /orders/{id}/status` - Update order status (pending, shipped, delivered)
 
-## Screenshots
 
-### User List
-
-![User List](https://github.com/user-attachments/assets/abb07c63-2df0-4bb7-809a-557bea9dc2ce)
-
-### Add Product
-
-![Add Product](https://github.com/user-attachments/assets/1c49a8e4-3920-4a6c-9c51-751331850140)
-
-### Order Status
-
-![Order Status](https://github.com/user-attachments/assets/5965f535-df41-4a28-b765-d3473ab4e72c)
 
 ## Getting Started
 
 1. Clone the repository
-2. Configure PostgreSQL database in `application.properties`
+2. Configure MySQL database in `application.properties`
 3. Run the application:
    ```bash
    mvn spring-boot:run
