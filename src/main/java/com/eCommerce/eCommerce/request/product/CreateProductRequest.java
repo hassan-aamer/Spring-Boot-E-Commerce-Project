@@ -4,64 +4,64 @@ import java.math.BigDecimal;
 
 public class CreateProductRequest {
 
-	private String name;
+    private String name;
 
-	private String brand;
+    private String brand;
 
-	private BigDecimal price;
+    private BigDecimal price;
 
-	private int inventory;
+    private int inventory;
 
-	private String description;
+    private String description;
 
-	private Long categoryId;
+    private Long categoryId;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getBrand() {
-		return brand;
-	}
+    public String getBrand() {
+        return brand;
+    }
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	public int getInventory() {
-		return inventory;
-	}
+    public int getInventory() {
+        return inventory;
+    }
 
-	public void setInventory(int inventory) {
-		this.inventory = inventory;
-	}
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
+    public Long getCategoryId() {
+        return categoryId;
+    }
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 
 }
