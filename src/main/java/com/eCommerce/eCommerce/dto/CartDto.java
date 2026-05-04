@@ -5,51 +5,51 @@ import java.util.List;
 
 public class CartDto {
 
-	private Long id;
+    private Long id;
 
-	private Long userId;
+    private Long userId;
 
-	private List<CartItemDto> cartItems;
+    private List<CartItemDto> cartItems;
 
-	private BigDecimal totalPrice;
+    private BigDecimal totalPrice;
 
-	public CartDto(Long id, Long userId, List<CartItemDto> cartItems, BigDecimal totalPrice) {
-		this.id = id;
-		this.userId = userId;
-		this.cartItems = cartItems;
-		this.totalPrice = totalPrice;
-	}
+    public CartDto(Long id, Long userId, List<CartItemDto> cartItems, BigDecimal totalPrice) {
+        this.id = id;
+        this.userId = userId;
+        this.cartItems = cartItems;
+        this.totalPrice = totalPrice;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getUserId() {
-		return userId;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public List<CartItemDto> getCartItems() {
-		return cartItems;
-	}
+    public List<CartItemDto> getCartItems() {
+        return cartItems;
+    }
 
-	public void setCartItems(List<CartItemDto> cartItems) {
-		this.cartItems = cartItems;
-	}
+    public void setCartItems(List<CartItemDto> cartItems) {
+        this.cartItems = cartItems;
+    }
 
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
-	}
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
 
-	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
 }

@@ -26,64 +26,64 @@ import com.eCommerce.eCommerce.service.category.CategoryService;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
-	private final CategoryService categoryService;
+    private final CategoryService categoryService;
 
-	public CategoryController(CategoryService categoryService) {
-		this.categoryService = categoryService;
-	}
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<ApiResponse> getCategoryById(@PathVariable Long id) {
-		try {
-			Category category = categoryService.getCategoryById(id);
-			CategoryDto categoryDto = categoryService.convertToDto(category);
-			return ResponseEntity.ok(new ApiResponse("Category fetched successfully", categoryDto));
-		} catch (ResourceNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
-		}
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse> getCategoryById(@PathVariable Long id) {
+        try {
+            Category category = categoryService.getCategoryById(id);
+            CategoryDto categoryDto = categoryService.convertToDto(category);
+            return ResponseEntity.ok(new ApiResponse("Category fetched successfully", categoryDto));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
-	@GetMapping
-	public ResponseEntity<ApiResponse> getAllCategories() {
-		List<Category> categories = categoryService.getAllCategories();
-		List<CategoryDto> categoryDtos = new ArrayList<>();
-		for (Category category : categories) {
-			categoryDtos.add(categoryService.convertToDto(category));
-		}
-		return ResponseEntity.ok(new ApiResponse("Categories fetched successfully", categoryDtos));
-	}
+    @GetMapping
+    public ResponseEntity<ApiResponse> getAllCategories() {
+        List<Category> categories = categoryService.getAllCategories();
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        for (Category category : categories) {
+            categoryDtos.add(categoryService.convertToDto(category));
+        }
+        return ResponseEntity.ok(new ApiResponse("Categories fetched successfully", categoryDtos));
+    }
 
-	@PostMapping
-	public ResponseEntity<ApiResponse> createCategory(@RequestBody CreateCategoryRequest request) {
-		try {
-			Category category = categoryService.createCategory(request);
-			CategoryDto categoryDto = categoryService.convertToDto(category);
-			return ResponseEntity.ok(new ApiResponse("Category created successfully", categoryDto));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(e.getMessage(), null));
-		}
-	}
+    @PostMapping
+    public ResponseEntity<ApiResponse> createCategory(@RequestBody CreateCategoryRequest request) {
+        try {
+            Category category = categoryService.createCategory(request);
+            CategoryDto categoryDto = categoryService.convertToDto(category);
+            return ResponseEntity.ok(new ApiResponse("Category created successfully", categoryDto));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<ApiResponse> updateCategory(@PathVariable Long id,
-			@RequestBody UpdateCategoryRequest request) {
-		try {
-			Category category = categoryService.updateCategory(id, request);
-			CategoryDto categoryDto = categoryService.convertToDto(category);
-			return ResponseEntity.ok(new ApiResponse("Category updated successfully", categoryDto));
-		} catch (ResourceNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
-		}
-	}
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> updateCategory(@PathVariable Long id,
+            @RequestBody UpdateCategoryRequest request) {
+        try {
+            Category category = categoryService.updateCategory(id, request);
+            CategoryDto categoryDto = categoryService.convertToDto(category);
+            return ResponseEntity.ok(new ApiResponse("Category updated successfully", categoryDto));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Long id) {
-		try {
-			categoryService.deleteCategory(id);
-			return ResponseEntity.ok(new ApiResponse("Category deleted successfully", null));
-		} catch (ResourceNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
-		}
-	}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Long id) {
+        try {
+            categoryService.deleteCategory(id);
+            return ResponseEntity.ok(new ApiResponse("Category deleted successfully", null));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
 }

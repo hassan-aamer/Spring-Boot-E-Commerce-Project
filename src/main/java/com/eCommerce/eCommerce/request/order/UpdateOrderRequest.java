@@ -4,44 +4,44 @@ import com.eCommerce.eCommerce.model.OrderStatus;
 
 public class UpdateOrderRequest {
 
-	private Long orderId;
+    private Long orderId;
 
-	private String shippingAddress;
+    private String shippingAddress;
 
-	private String billingAddress;
+    private String billingAddress;
 
-	private OrderStatus status;
+    private OrderStatus status;
 
-	public Long getOrderId() {
-		return orderId;
-	}
+    public Long getOrderId() {
+        return orderId;
+    }
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
 
-	public String getShippingAddress() {
-		return shippingAddress;
-	}
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
 
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
-	}
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
 
-	public String getBillingAddress() {
-		return billingAddress;
-	}
+    public String getBillingAddress() {
+        return billingAddress;
+    }
 
-	public void setBillingAddress(String billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
-	public OrderStatus getStatus() {
-		return status;
-	}
+    public OrderStatus getStatus() {
+        return status;
+    }
 
-	public void setStatus(OrderStatus status) {
-		this.status = status;
-	}
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
 
 }
