@@ -64,7 +64,7 @@ Run the entire application and database with a single command:
 docker-compose up --build
 ```
 
-Access the API at `http://localhost:8080` and Swagger UI at `http://localhost:8080/swagger-ui.html`.
+Access the API at `http://localhost:8085`, Swagger UI at `http://localhost:8085/swagger-ui.html`, and phpMyAdmin at `http://localhost:8086`.
 
 ### Option 2: Run Locally
 
