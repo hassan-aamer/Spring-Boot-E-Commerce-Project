@@ -1,9 +1,13 @@
 package com.eCommerce.eCommerce.request.user;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class UserUpdateRequest {
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
 
     public String getFirstName() {

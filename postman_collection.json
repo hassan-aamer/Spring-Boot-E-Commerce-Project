@@ -35,6 +35,16 @@
           }
         },
         {
+          "name": "Create user - validation example",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"\",\n  \"lastName\": \"Doe\",\n  \"email\": \"invalid-email\",\n  \"password\": \"short\"\n}" },
+            "url": "{{baseUrl}}/api/users",
+            "description": "Expected response: 400 Bad Request with validation errors."
+          }
+        },
+        {
           "name": "Update user",
           "request": {
             "method": "PUT",
