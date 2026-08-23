@@ -1,96 +1,62 @@
 {
   "info": {
-    "name": "Spring Boot E-Commerce API",
-    "description": "Postman collection for the Spring Boot e-commerce REST API.",
+    "name": "Spring Boot E-Commerce REST API",
+    "description": "Comprehensive Postman collection for the Spring Boot E-Commerce REST API including Authentication, Products, Carts, Orders, Payments, and User Management.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" },
     { "key": "userId", "value": "1" },
     { "key": "productId", "value": "1" },
     { "key": "categoryId", "value": "1" },
     { "key": "cartId", "value": "1" },
     { "key": "cartItemId", "value": "1" },
-    { "key": "orderId", "value": "1" }
+    { "key": "orderId", "value": "1" },
+    { "key": "paymentId", "value": "1" }
   ],
   "item": [
     {
-      "name": "Users",
+      "name": "Authentication",
       "item": [
         {
-          "name": "Get all users",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/users" }
-        },
-        {
-          "name": "Get user by ID",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/users/{{userId}}" }
-        },
-        {
-          "name": "Create user",
+          "name": "Register User",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}" },
-            "url": "{{baseUrl}}/api/users"
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Hassan\",\n  \"lastName\": \"Aamer\",\n  \"email\": \"hassan@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/register"
           }
         },
         {
-          "name": "Create user - validation example",
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('token', jsonData.data.token);",
+                  "    console.log('JWT Token saved:', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"\",\n  \"lastName\": \"Doe\",\n  \"email\": \"invalid-email\",\n  \"password\": \"short\"\n}" },
-            "url": "{{baseUrl}}/api/users",
-            "description": "Expected response: 400 Bad Request with validation errors."
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"hassan@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
           }
-        },
-        {
-          "name": "Update user",
-          "request": {
-            "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Updated\"\n}" },
-            "url": "{{baseUrl}}/api/users/{{userId}}"
-          }
-        },
-        {
-          "name": "Delete user",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/users/{{userId}}" }
-        }
-      ]
-    },
-    {
-      "name": "Categories",
-      "item": [
-        {
-          "name": "Get all categories",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/categories" }
-        },
-        {
-          "name": "Get category by ID",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/categories/{{categoryId}}" }
-        },
-        {
-          "name": "Create category",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Electronics\"\n}" },
-            "url": "{{baseUrl}}/api/categories"
-          }
-        },
-        {
-          "name": "Update category",
-          "request": {
-            "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Electronics\"\n}" },
-            "url": "{{baseUrl}}/api/categories/{{categoryId}}"
-          }
-        },
-        {
-          "name": "Delete category",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/categories/{{categoryId}}" }
         }
       ]
     },
@@ -108,59 +74,108 @@
         {
           "name": "Create product",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Wireless Headphones\",\n  \"brand\": \"Acme\",\n  \"price\": 79.99,\n  \"inventory\": 25,\n  \"description\": \"Bluetooth over-ear headphones\",\n  \"categoryId\": {{categoryId}}\n}" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Wireless Gaming Mouse\",\n  \"brand\": \"Logitech\",\n  \"price\": 89.99,\n  \"inventory\": 50,\n  \"description\": \"High precision wireless mouse\",\n  \"categoryId\": {{categoryId}}\n}"
+            },
             "url": "{{baseUrl}}/api/products"
           }
         },
         {
           "name": "Update product",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "PUT",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Headphones\",\n  \"brand\": \"Acme\",\n  \"price\": 69.99,\n  \"inventory\": 30,\n  \"description\": \"Updated product description\",\n  \"categoryId\": {{categoryId}}\n}" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Logitech G Pro Mouse\",\n  \"brand\": \"Logitech\",\n  \"price\": 79.99,\n  \"inventory\": 45,\n  \"description\": \"Pro wireless gaming mouse\",\n  \"categoryId\": {{categoryId}}\n}"
+            },
             "url": "{{baseUrl}}/api/products/{{productId}}"
           }
         },
         {
           "name": "Delete product",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/products/{{productId}}" }
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/products/{{productId}}"
+          }
         }
       ]
     },
     {
-      "name": "Carts",
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get all categories",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/categories" }
+        },
+        {
+          "name": "Get category by ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/categories/{{categoryId}}" }
+        },
+        {
+          "name": "Create category",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Electronics\"\n}" },
+            "url": "{{baseUrl}}/api/categories"
+          }
+        },
+        {
+          "name": "Update category",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Gaming Accessories\"\n}" },
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+          }
+        },
+        {
+          "name": "Delete category",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carts & Cart Items",
       "item": [
         {
           "name": "Create cart",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"userId\": {{userId}},\n  \"productIds\": [{{productId}}],\n  \"quantities\": [1]\n}" },
+            "body": { "mode": "raw", "raw": "{\n  \"userId\": {{userId}},\n  \"productIds\": [{{productId}}],\n  \"quantities\": [2]\n}" },
             "url": "{{baseUrl}}/api/carts"
           }
         },
         {
           "name": "Get cart by user ID",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/carts/user/{{userId}}" }
-        },
-        {
-          "name": "Update cart",
           "request": {
-            "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"cartItemIds\": [{{cartItemId}}]\n}" },
-            "url": "{{baseUrl}}/api/carts/{{cartId}}"
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/carts/user/{{userId}}"
           }
-        },
-        {
-          "name": "Delete cart",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/carts/{{cartId}}" }
         },
         {
           "name": "Add item to cart",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": { "mode": "raw", "raw": "{\n  \"productId\": {{productId}},\n  \"quantity\": 1\n}" },
@@ -168,52 +183,32 @@
           }
         },
         {
-          "name": "Get cart items",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/carts/{{cartId}}/items" }
-        },
-        {
-          "name": "Update cart item from cart",
+          "name": "Get items in cart",
           "request": {
-            "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"quantity\": 2\n}" },
-            "url": "{{baseUrl}}/api/carts/items/{{cartItemId}}"
-          }
-        },
-        {
-          "name": "Delete cart item from cart",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/carts/items/{{cartItemId}}" }
-        }
-      ]
-    },
-    {
-      "name": "Cart Items",
-      "item": [
-        {
-          "name": "Get cart item by ID",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/cart-items/{{cartItemId}}" }
-        },
-        {
-          "name": "Create cart item",
-          "request": {
-            "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"productId\": {{productId}},\n  \"cartId\": {{cartId}},\n  \"quantity\": 1\n}" },
-            "url": "{{baseUrl}}/api/cart-items"
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/carts/{{cartId}}/items"
           }
         },
         {
           "name": "Update cart item",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "PUT",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"cartItemId\": {{cartItemId}},\n  \"quantity\": 2\n}" },
-            "url": "{{baseUrl}}/api/cart-items"
+            "body": { "mode": "raw", "raw": "{\n  \"quantity\": 3\n}" },
+            "url": "{{baseUrl}}/api/cart-items/{{cartItemId}}"
           }
         },
         {
           "name": "Delete cart item",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/cart-items/{{cartItemId}}" }
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/cart-items/{{cartItemId}}"
+          }
         }
       ]
     },
@@ -221,42 +216,131 @@
       "name": "Orders",
       "item": [
         {
-          "name": "Create order",
+          "name": "Create order from cart",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"userId\": {{userId}},\n  \"cartItemIds\": [{{cartItemId}}],\n  \"shippingAddress\": \"123 Main Street\",\n  \"billingAddress\": \"123 Main Street\"\n}" },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": {{userId}},\n  \"cartItemIds\": [{{cartItemId}}],\n  \"shippingAddress\": \"123 Cairo St\",\n  \"billingAddress\": \"123 Cairo St\"\n}"
+            },
             "url": "{{baseUrl}}/api/orders"
           }
         },
         {
           "name": "Get order by ID",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/{{orderId}}" }
-        },
-        {
-          "name": "Get orders by user ID",
-          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/user/{{userId}}" }
-        },
-        {
-          "name": "Update order status",
           "request": {
-            "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"status\": \"PROCESSING\"\n}" },
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
             "url": "{{baseUrl}}/api/orders/{{orderId}}"
           }
         },
         {
-          "name": "Update order status by query parameter",
+          "name": "Get orders by user ID",
           "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/user/{{userId}}"
+          }
+        },
+        {
+          "name": "Update order status",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
             "method": "PUT",
             "header": [],
-            "url": "{{baseUrl}}/api/orders/{{orderId}}/status?newStatus=PROCESSING"
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/status?newStatus=SHIPPED"
           }
         },
         {
           "name": "Cancel order",
-          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/orders/{{orderId}}" }
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Process Payment",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": {{orderId}},\n  \"amount\": 179.98,\n  \"paymentMethod\": \"CREDIT_CARD\"\n}"
+            },
+            "url": "{{baseUrl}}/api/payments"
+          }
+        },
+        {
+          "name": "Get payment by ID",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/payments/{{paymentId}}"
+          }
+        },
+        {
+          "name": "Get payment by order ID",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/payments/order/{{orderId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get all users",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/users"
+          }
+        },
+        {
+          "name": "Get user by ID",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          }
+        },
+        {
+          "name": "Update user profile",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"Hassan\",\n  \"lastName\": \"Updated\"\n}" },
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          }
+        },
+        {
+          "name": "Delete user",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          }
         }
       ]
     }
