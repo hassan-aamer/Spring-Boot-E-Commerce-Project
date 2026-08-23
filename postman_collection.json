@@ -1,0 +1,254 @@
+{
+  "info": {
+    "name": "Spring Boot E-Commerce API",
+    "description": "Postman collection for the Spring Boot e-commerce REST API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "userId", "value": "1" },
+    { "key": "productId", "value": "1" },
+    { "key": "categoryId", "value": "1" },
+    { "key": "cartId", "value": "1" },
+    { "key": "cartItemId", "value": "1" },
+    { "key": "orderId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get all users",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/users" }
+        },
+        {
+          "name": "Get user by ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/users/{{userId}}" }
+        },
+        {
+          "name": "Create user",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}" },
+            "url": "{{baseUrl}}/api/users"
+          }
+        },
+        {
+          "name": "Update user",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Updated\"\n}" },
+            "url": "{{baseUrl}}/api/users/{{userId}}"
+          }
+        },
+        {
+          "name": "Delete user",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/users/{{userId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get all categories",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/categories" }
+        },
+        {
+          "name": "Get category by ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/categories/{{categoryId}}" }
+        },
+        {
+          "name": "Create category",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Electronics\"\n}" },
+            "url": "{{baseUrl}}/api/categories"
+          }
+        },
+        {
+          "name": "Update category",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Electronics\"\n}" },
+            "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+          }
+        },
+        {
+          "name": "Delete category",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/categories/{{categoryId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get all products",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/products" }
+        },
+        {
+          "name": "Get product by ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/products/{{productId}}" }
+        },
+        {
+          "name": "Create product",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Wireless Headphones\",\n  \"brand\": \"Acme\",\n  \"price\": 79.99,\n  \"inventory\": 25,\n  \"description\": \"Bluetooth over-ear headphones\",\n  \"categoryId\": {{categoryId}}\n}" },
+            "url": "{{baseUrl}}/api/products"
+          }
+        },
+        {
+          "name": "Update product",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Headphones\",\n  \"brand\": \"Acme\",\n  \"price\": 69.99,\n  \"inventory\": 30,\n  \"description\": \"Updated product description\",\n  \"categoryId\": {{categoryId}}\n}" },
+            "url": "{{baseUrl}}/api/products/{{productId}}"
+          }
+        },
+        {
+          "name": "Delete product",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/products/{{productId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Carts",
+      "item": [
+        {
+          "name": "Create cart",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"userId\": {{userId}},\n  \"productIds\": [{{productId}}],\n  \"quantities\": [1]\n}" },
+            "url": "{{baseUrl}}/api/carts"
+          }
+        },
+        {
+          "name": "Get cart by user ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/carts/user/{{userId}}" }
+        },
+        {
+          "name": "Update cart",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"cartItemIds\": [{{cartItemId}}]\n}" },
+            "url": "{{baseUrl}}/api/carts/{{cartId}}"
+          }
+        },
+        {
+          "name": "Delete cart",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/carts/{{cartId}}" }
+        },
+        {
+          "name": "Add item to cart",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"productId\": {{productId}},\n  \"quantity\": 1\n}" },
+            "url": "{{baseUrl}}/api/carts/{{cartId}}/items"
+          }
+        },
+        {
+          "name": "Get cart items",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/carts/{{cartId}}/items" }
+        },
+        {
+          "name": "Update cart item from cart",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"quantity\": 2\n}" },
+            "url": "{{baseUrl}}/api/carts/items/{{cartItemId}}"
+          }
+        },
+        {
+          "name": "Delete cart item from cart",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/carts/items/{{cartItemId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Cart Items",
+      "item": [
+        {
+          "name": "Get cart item by ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/cart-items/{{cartItemId}}" }
+        },
+        {
+          "name": "Create cart item",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"productId\": {{productId}},\n  \"cartId\": {{cartId}},\n  \"quantity\": 1\n}" },
+            "url": "{{baseUrl}}/api/cart-items"
+          }
+        },
+        {
+          "name": "Update cart item",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"cartItemId\": {{cartItemId}},\n  \"quantity\": 2\n}" },
+            "url": "{{baseUrl}}/api/cart-items"
+          }
+        },
+        {
+          "name": "Delete cart item",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/cart-items/{{cartItemId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"userId\": {{userId}},\n  \"cartItemIds\": [{{cartItemId}}],\n  \"shippingAddress\": \"123 Main Street\",\n  \"billingAddress\": \"123 Main Street\"\n}" },
+            "url": "{{baseUrl}}/api/orders"
+          }
+        },
+        {
+          "name": "Get order by ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/{{orderId}}" }
+        },
+        {
+          "name": "Get orders by user ID",
+          "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/orders/user/{{userId}}" }
+        },
+        {
+          "name": "Update order status",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"PROCESSING\"\n}" },
+            "url": "{{baseUrl}}/api/orders/{{orderId}}"
+          }
+        },
+        {
+          "name": "Update order status by query parameter",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/status?newStatus=PROCESSING"
+          }
+        },
+        {
+          "name": "Cancel order",
+          "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/orders/{{orderId}}" }
+        }
+      ]
+    }
+  ]
+}
