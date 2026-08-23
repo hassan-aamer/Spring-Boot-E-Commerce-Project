@@ -44,7 +44,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> getAllUsers() {
         List<User> users = userService.getAllUsers();
         List<UserDto> userDtos = users.stream().map(userService::convertUserToDto).collect(Collectors.toList());
-        return ResponseEntity.ok(new ApiResponse("Products fetched successfully", userDtos));
+        return ResponseEntity.ok(new ApiResponse("Users fetched successfully", userDtos));
     }
 
     @PostMapping

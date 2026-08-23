@@ -1,10 +1,10 @@
-package com.eCommerce.eCommerce.service.cardItem;
+package com.eCommerce.eCommerce.service.cartItem;
 
 import java.util.List;
 
 import com.eCommerce.eCommerce.dto.CartItemDto;
-import com.eCommerce.eCommerce.request.cardItem.AddCartItemRequest;
-import com.eCommerce.eCommerce.request.cardItem.UpdateCartItemRequest;
+import com.eCommerce.eCommerce.request.cartItem.AddCartItemRequest;
+import com.eCommerce.eCommerce.request.cartItem.UpdateCartItemRequest;
 
 public interface CartItemService {
 

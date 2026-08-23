@@ -3,6 +3,7 @@ package com.eCommerce.eCommerce.controller.product;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ import com.eCommerce.eCommerce.request.product.UpdateProductRequest;
 import com.eCommerce.eCommerce.response.ApiResponse;
 import com.eCommerce.eCommerce.service.product.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -32,13 +35,9 @@ public class ProductController {
 
     @GetMapping("/{productId}")
     public ResponseEntity<ApiResponse> getProductById(@PathVariable Long productId) {
-        try {
-            Product product = productService.getProductById(productId);
-            ProductDto productDto = productService.convertProductToDto(product);
-            return ResponseEntity.ok(new ApiResponse("Product fetched successfully", productDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body(new ApiResponse(e.getMessage(), null));
-        }
+        Product product = productService.getProductById(productId);
+        ProductDto productDto = productService.convertProductToDto(product);
+        return ResponseEntity.ok(new ApiResponse("Product fetched successfully", productDto));
     }
 
     @GetMapping
@@ -50,35 +49,24 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse> createProduct(@RequestBody CreateProductRequest request) {
-        try {
-            Product product = productService.createProduct(request);
-            ProductDto productDto = productService.convertProductToDto(product);
-            return ResponseEntity.ok(new ApiResponse("Product created successfully", productDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body(new ApiResponse(e.getMessage(), null));
-        }
+    public ResponseEntity<ApiResponse> createProduct(@Valid @RequestBody CreateProductRequest request) {
+        Product product = productService.createProduct(request);
+        ProductDto productDto = productService.convertProductToDto(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse("Product created successfully", productDto));
     }
 
     @PutMapping("/{productId}")
     public ResponseEntity<ApiResponse> updateProduct(@PathVariable Long productId,
-            @RequestBody UpdateProductRequest request) {
-        try {
-            Product product = productService.updateProduct(productId, request);
-            ProductDto productDto = productService.convertProductToDto(product);
-            return ResponseEntity.ok(new ApiResponse("Product updated successfully", productDto));
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body(new ApiResponse(e.getMessage(), null));
-        }
+            @Valid @RequestBody UpdateProductRequest request) {
+        Product product = productService.updateProduct(productId, request);
+        ProductDto productDto = productService.convertProductToDto(product);
+        return ResponseEntity.ok(new ApiResponse("Product updated successfully", productDto));
     }
 
     @DeleteMapping("/{productId}")
     public ResponseEntity<ApiResponse> deleteProduct(@PathVariable Long productId) {
-        try {
-            productService.deleteProduct(productId);
-            return ResponseEntity.ok(new ApiResponse("Product deleted successfully", null));
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body(new ApiResponse(e.getMessage(), null));
-        }
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok(new ApiResponse("Product deleted successfully", null));
     }
 }
+

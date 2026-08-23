@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.service.card;
+package com.eCommerce.eCommerce.service.cart;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ import com.eCommerce.eCommerce.model.Cart;
 import com.eCommerce.eCommerce.model.CartItem;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.User;
-import com.eCommerce.eCommerce.repository.card.CartItemRepository;
-import com.eCommerce.eCommerce.repository.card.CartRepository;
+import com.eCommerce.eCommerce.repository.cart.CartItemRepository;
+import com.eCommerce.eCommerce.repository.cart.CartRepository;
 import com.eCommerce.eCommerce.repository.product.ProductRepository;
 import com.eCommerce.eCommerce.repository.user.UserRepository;
-import com.eCommerce.eCommerce.request.card.CreateCartRequest;
-import com.eCommerce.eCommerce.request.card.UpdateCartRequest;
+import com.eCommerce.eCommerce.request.cart.CreateCartRequest;
+import com.eCommerce.eCommerce.request.cart.UpdateCartRequest;
 
 @Service
 public class CartServiceImpl implements CartService {

@@ -1,8 +1,8 @@
-package com.eCommerce.eCommerce.service.card;
+package com.eCommerce.eCommerce.service.cart;
 
 import com.eCommerce.eCommerce.dto.CartDto;
-import com.eCommerce.eCommerce.request.card.CreateCartRequest;
-import com.eCommerce.eCommerce.request.card.UpdateCartRequest;
+import com.eCommerce.eCommerce.request.cart.CreateCartRequest;
+import com.eCommerce.eCommerce.request.cart.UpdateCartRequest;
 
 public interface CartService {
 

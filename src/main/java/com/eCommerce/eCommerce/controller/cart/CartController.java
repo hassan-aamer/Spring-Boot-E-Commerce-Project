@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eCommerce.eCommerce.dto.CartDto;
 import com.eCommerce.eCommerce.dto.CartItemDto;
-import com.eCommerce.eCommerce.request.card.CreateCartRequest;
-import com.eCommerce.eCommerce.request.card.UpdateCartRequest;
-import com.eCommerce.eCommerce.request.cardItem.AddCartItemRequest;
-import com.eCommerce.eCommerce.request.cardItem.UpdateCartItemRequest;
-import com.eCommerce.eCommerce.service.card.CartService;
-import com.eCommerce.eCommerce.service.cardItem.CartItemService;
+import com.eCommerce.eCommerce.request.cart.CreateCartRequest;
+import com.eCommerce.eCommerce.request.cart.UpdateCartRequest;
+import com.eCommerce.eCommerce.request.cartItem.AddCartItemRequest;
+import com.eCommerce.eCommerce.request.cartItem.UpdateCartItemRequest;
+import com.eCommerce.eCommerce.service.cart.CartService;
+import com.eCommerce.eCommerce.service.cartItem.CartItemService;
 
 @RestController
 @RequestMapping("/api/carts")

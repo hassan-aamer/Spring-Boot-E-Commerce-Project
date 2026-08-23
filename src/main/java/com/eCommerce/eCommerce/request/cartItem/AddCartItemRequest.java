@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.request.cardItem;
+package com.eCommerce.eCommerce.request.cartItem;
 
 public class AddCartItemRequest {
 

@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.service.cardItem;
+package com.eCommerce.eCommerce.service.cartItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,11 @@ import com.eCommerce.eCommerce.dto.CartItemDto;
 import com.eCommerce.eCommerce.model.Cart;
 import com.eCommerce.eCommerce.model.CartItem;
 import com.eCommerce.eCommerce.model.Product;
-import com.eCommerce.eCommerce.repository.card.CartItemRepository;
-import com.eCommerce.eCommerce.repository.card.CartRepository;
+import com.eCommerce.eCommerce.repository.cart.CartItemRepository;
+import com.eCommerce.eCommerce.repository.cart.CartRepository;
 import com.eCommerce.eCommerce.repository.product.ProductRepository;
-import com.eCommerce.eCommerce.request.cardItem.AddCartItemRequest;
-import com.eCommerce.eCommerce.request.cardItem.UpdateCartItemRequest;
+import com.eCommerce.eCommerce.request.cartItem.AddCartItemRequest;
+import com.eCommerce.eCommerce.request.cartItem.UpdateCartItemRequest;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {

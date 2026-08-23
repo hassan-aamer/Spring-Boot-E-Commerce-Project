@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.request.card;
+package com.eCommerce.eCommerce.request.cart;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.repository.card;
+package com.eCommerce.eCommerce.repository.cart;
 
 import java.util.List;
 
